@@ -16,7 +16,15 @@ data = load_data("data/covid19_20210622.csv")
 if st.checkbox('show raw data'):
     st.write(data)
 
-if st.checkbox('Show all cases'):
-    st.subheader('all cases')
-    all_data = pd.DataFrame(data.values.T, index=data.columns, columns=data["name"].unique())
-    st.line_chart(all_data)
+
+product_list = data.columns[2:]
+product_type = st.sidebar.selectbox(
+    "Which data to show",
+    product_list,
+    key = 'a'
+)
+
+st.title(f"{product_type} up to 6/22/2021")
+sub_data = data[[product_type]]
+sub_data.index = np.array(data['name'])
+st.line_chart(sub_data)    

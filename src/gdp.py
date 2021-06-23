@@ -23,7 +23,6 @@ if st.checkbox('Show all gdp'):
     st.line_chart(all_data)
 
 product_list = data["country name"].unique()
-print(product_list)
 
 product_type = st.sidebar.selectbox(
     "Which kind of event do you want to compare?",
@@ -46,6 +45,6 @@ if(product_type != product_type_2):
 
 else:
     st.title(f"{product_type}的GDP折线图")
-    sub_data = data[(data["country name"] == product_type) | (data["country name"] == product_type_2)]
+    sub_data = data[(data["country name"] == product_type)]
     sub_data2 = pd.DataFrame(sub_data.values.T, index=sub_data.columns, columns=[product_type])[4:]
     st.line_chart(sub_data2)
