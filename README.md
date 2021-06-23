@@ -1,2 +1,2 @@
-# world_bank_data
- Visual display of World Bank data based on streamlit
+# visual_data
+ Visual display of data based on streamlit
