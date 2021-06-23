@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 
 st.title('world gdp')
-DATE_COLUMN = '1960'
 
 @st.cache
 def load_data(path):
@@ -18,8 +17,9 @@ if st.checkbox('show raw data'):
     st.write(data)
 
 if st.checkbox('Show all gdp'):
-    st.subheader('all')
-    all_data = pd.DataFrame(data.values.T, index=data.columns, columns=data["country name"].unique())[4:]
+    st.subheader('all(color is too much, so the id is not useful)')
+    # all_data = pd.DataFrame(data.values.T, index=data.columns, columns=data["country name"].unique())[4:]
+    all_data = pd.DataFrame(data.values.T, index=data.columns, columns=data.index)[4:]
     st.line_chart(all_data)
 
 product_list = data["country name"].unique()
@@ -38,7 +38,7 @@ product_type_2 = st.sidebar.selectbox(
 )
 
 if(product_type != product_type_2):
-    st.title(f"{product_type} vs {product_type_2} 的GDP对比图")
+    st.title(f"{product_type} vs {product_type_2} GDP")
     sub_data = data[(data["country name"] == product_type) | (data["country name"] == product_type_2)]
     sub_data2 = pd.DataFrame(sub_data.values.T, index=sub_data.columns, columns=[product_type, product_type_2])[4:]
 
